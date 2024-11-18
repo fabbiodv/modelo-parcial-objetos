@@ -1,0 +1,26 @@
+Los isleños
+En una lejana isla en el medio del mediterráneo, habitan unos pobladores que tienen la particularidad de ser longevos, algunos hasta superaron los 100 años. Como queríamos conocer sus secretos, varios docentes viajamos y obtuvimos la siguiente información.
+De cada habitante de la isla se conoce su nivel de energia, su vitalidad, su fuerza y su fecha de
+nacimiento. Entre sus pobladores algunos son autóctonos, es decir los que nacieron en ella. Y otros en cambio se enamoraron del lugar y se fueron a vivir a la isla por una cantidad de años.
+Se sabe que la calidad de vida de los pobladores autóctonos es el 60% de su edad.
+Mientras que la calidad de vida de los pobladores extranjeros que viven en la isla por un tiempo es la cuarta parte de la calidad de vida de los autóctonos, más la mitad de la cantidad de años que habitan en la isla.
+Todos los pobladores tienen una actividad principal que realiza diariamente, esta
+puede ser:
+Agricultor: se encargan del cultivo de la tierra. De los productos que cultivan se conoce la cantidad y además se sabe que algunos son orgánicos y en otros en cambio no, ya que usan plaguicidas para su cultivo.
+Apicultor: se encargan del cuidado y mantenimiento de las abejas. Obtiene sus productos derivados como ser miel, polen etc, de cada uno se conoce la cantidad y se sabe que pueden ser o no orgánicos..
+Pesquero: se encargan de pescar en el mar. Se considera que los productos que se obtienen de esta actividad son orgánicos.
+De los productos orgánicos se sabe que otorgan tanta energía como su cantidad de gramos, en cambio en los productos que no son orgánicos la energía que otorgan es la cantidad de gramos menos el 90% de la cantidad total de plaguicidas utilizada.
+Además de la actividad principal, varios realizan otras actividades programadas como por ejemplo:
+Correr: una cantidad de metros, la cual disminuye la cantidad de energía en tanto como la mitad de la cantidad de metros que corra. Y además aumenta su fuerza en un 20% de los metros que corrió.
+Ciclismo: disminuye la energía en tanto como la mitad de la velocidad y además aumenta la vitalidad en la tercera parte de su velocidad.
+Saltar la soga: disminuye la energía tanto como la cantidad de saltos y aumenta la vitalidad en la mitad de los saltos que realiza.
+Consumir Ración: aumenta la energia tanto como la cantidad de productos que se consume, tener en cuenta que sólo se consume los productos obtenidos en la isla.
+Puede que hayan nuevas actividades o que alguna actividad se deje de realizar y sea reemplazada por otra.
+Se pide realizar diagrama estático de la solución y codificación para satisfacer
+siguientes requerimientos:
+1) Dado un poblador hacer que realice su actividad diaria.
+2) Dado un poblador conocer la cantidad de productos que genera diariamente.
+3) Dado un poblador conocer la calidad de vida que tiene.
+4) Hacer que un poblador realice todas las actividades que tiene programadas en el orden en que están, siempre que pueda. Si hay una actividad que no puede realizar porque no le alcanza la energía, se debería interrumpir la ejecución y comunicarlo al usuario.
+5) Detallar y justificar apropiadamente la utilización de los conceptos de herencia y polimorfismo. Es decir: dónde se usaron, y qué beneficios
+aportaron a su solución
