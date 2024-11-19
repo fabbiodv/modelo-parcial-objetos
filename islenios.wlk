@@ -4,6 +4,7 @@ class Poblador {
 	var property fuerza
 	var property fechaNacimiento
 	var property actividadPrincipal
+	const property actividadesProgramadas = []
 	
 	method realizarActividadDiaria() {
 		actividadPrincipal.realizar(self)
@@ -13,21 +14,28 @@ class Poblador {
 		energia += cantidad
 	}
 	
-	method cantidadProductosDiarios() {
-		return actividadPrincipal.cantidadProductos()
-	}
+	method cantidadProductosDiarios() = actividadPrincipal.cantidadProductos()
 	
-	method edad() {
-		return new Date().year() - fechaNacimiento.year()
-	}
+	method edad() = new Date().year() - fechaNacimiento.year()
 	
 	method calidadDeVida()
+	
+	method realizarActividadesProgramadas() {
+		actividadesProgramadas.forEach(
+			{ actividad =>
+				if (energia <= 0) {
+					throw new Exception(
+						message = "No hay suficiente energía para continuar con las actividades"
+					)
+				}
+				return actividad.realizar(self)
+			}
+		)
+	}
 }
 
 class PobladorAutoctono inherits Poblador {
-	override method calidadDeVida() {
-		return self.edad() * 0.6
-	}
+	override method calidadDeVida() = self.edad() * 0.6
 }
 
 class PobladorExtranjero inherits Poblador {
@@ -46,51 +54,92 @@ class PobladorExtranjero inherits Poblador {
 	}
 }
 
+
+class Producto {
+	const property cantidadGramos
+	const property esOrganico
+	
+	method energiaQueOtorga(cantidadPlaguicidas) {
+		if (esOrganico) {	
+			return cantidadGramos 
+		} else {
+			return cantidadGramos - (cantidadPlaguicidas * 0.9)
+		}
+	}
+}
+
 class ActividadPrincipal {
 	const property productos = []
 	
 	method realizar(poblador)
-	method esOrganico()
 	method cantidadProductos() = productos.size()
 }
 
 class Agricultor inherits ActividadPrincipal {
-	var property usaPlaguicidas
 	var property cantidadPlaguicidas
 	
 	override method realizar(poblador) {
-		const energiaGenerada = productos.sum({ producto => 
-			if (self.esOrganico()) 
-				producto 
-			else 
-				producto - (cantidadPlaguicidas * 0.9)
-		})
+		const energiaGenerada = productos.sum(
+			{ producto => producto.energiaQueOtorga(cantidadPlaguicidas) }
+		)
 		poblador.modificarEnergia(energiaGenerada)
 	}
 	
-	override method esOrganico() = !usaPlaguicidas
 }
 
-class Apicultor inherits ActividadPrincipal {
-	
+object apicultor inherits ActividadPrincipal {
 	override method realizar(poblador) {
-		const energiaGenerada = productos.sum({ producto => 
-			if (self.esOrganico()) 
-				producto 
-			else 
-				producto - (producto * 0.9)
-		})
+		const energiaGenerada = productos.sum(
+			{ producto => producto.energiaQueOtorga() }
+		)
 		poblador.modificarEnergia(energiaGenerada)
 	}
-	
-	override method esOrganico() = true
 }
 
-class Pesquero inherits ActividadPrincipal {
+object pesquero inherits ActividadPrincipal {
 	override method realizar(poblador) {
-		const energiaGenerada = productos.sum({ producto => producto })
+		const energiaGenerada = productos.sum(
+			{ producto => producto.energiaQueOtorga() }
+		)
 		poblador.modificarEnergia(energiaGenerada)
 	}
+}
+
+class ActividadProgramada {
+	method realizar(poblador)
+}
+
+class Correr inherits ActividadProgramada {
+	const metros
 	
-	override method esOrganico() = true
+	override method realizar(poblador) {
+		poblador.modificarEnergia((-metros) / 2)
+		poblador.fuerza(poblador.fuerza() + (metros * 0.2))
+	}
+}
+
+class Ciclismo inherits ActividadProgramada {
+	const velocidad
+	
+	override method realizar(poblador) {
+		poblador.modificarEnergia((-velocidad) / 2)
+		poblador.vitalidad(poblador.vitalidad() + (velocidad / 3))
+	}
+}
+
+class SaltarSoga inherits ActividadProgramada {
+	const cantidadSaltos
+	
+	override method realizar(poblador) {
+		poblador.modificarEnergia(-cantidadSaltos)
+		poblador.vitalidad(poblador.vitalidad() + (cantidadSaltos / 2))
+	}
+}
+
+class ConsumirRacion inherits ActividadProgramada {
+	const cantidadProductos
+	
+	override method realizar(poblador) {
+		poblador.modificarEnergia(cantidadProductos)
+	}
 }
